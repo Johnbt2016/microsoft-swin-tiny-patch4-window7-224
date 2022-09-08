@@ -5,6 +5,8 @@ from PIL import Image
 import requests
 import streamlit as st
 
+device = "cuda:0"
+
 #######################################################
 def __get_image__(image_file):
 
@@ -19,9 +21,9 @@ def __get_image__(image_file):
 def compute(img):
 
 	feature_extractor = AutoFeatureExtractor.from_pretrained("microsoft/swin-tiny-patch4-window7-224")
-	model = SwinForImageClassification.from_pretrained("microsoft/swin-tiny-patch4-window7-224")
+	model = SwinForImageClassification.from_pretrained("microsoft/swin-tiny-patch4-window7-224").to(device)
 
-	inputs = feature_extractor(images=img, return_tensors="pt")
+	inputs = feature_extractor(images=img, return_tensors="pt").to(device)
 	outputs = model(**inputs)
 	logits = outputs.logits
 
