@@ -1,7 +1,8 @@
-torch
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==1.12.0+cu116
 torchvision
 torchaudio
 transformers
-PIL
+Pillow
 requests
 streamlit
